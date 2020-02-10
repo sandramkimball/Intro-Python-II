@@ -1,5 +1,17 @@
-from Room import Room
-from Player import Player
+from room import Room
+from player import Player
+
+# Make a new player that is currently 'outside'.
+# Write a loop that prints current room name and description.
+# If user enters a cardinal direction, move to the room there.
+# Print error message if the movement isn't allowed.
+# If the user enters "q", quit the game.
+
+# PART 2:
+# Make rooms able to hold multiple items
+# Make the player able to carry multiple items
+# Add items to the game that the user can carry around
+# Add get [ITEM_NAME] and drop [ITEM_NAME] commands to the parser
 
 # Declare all the rooms
 room = {
@@ -14,7 +26,6 @@ room = {
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", "Legendary Squeeky Toy"),
 }
 
-
 # Link rooms together
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
@@ -25,24 +36,14 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-
-# Make a new player object that is currently in the 'outside' room.
-# Write a loop that:
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-# If the user enters "q", quit the game.
-
 player1 = Player('A-aron', 'outside', 'bat')
 
-def status_report(player, current_room, room):
 
-    print(f"Current Room: {current_room.name}\n{current_room.description}")
-
+def status_report(player, room):
+    current_room = [player.current_room]
+    
     quit = False
+
     while not quit: 
         command = input("(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\nCommand: ")
         command = command.lower().strip()
@@ -53,10 +54,22 @@ def status_report(player, current_room, room):
         if command == 'q':
             quit = True
 
-        if room[{current_room}].{command}_to:
-                current_room = room[{current_room}].{command}_to
-                print(f"{current_room}")
+        if command == 'n' and room[{current_room}].n_to:
+            current_room = room[{current_room}].n_to
 
-        elif room[{current_room}].{command}_to is None:
+        if command == 's' and room[{current_room}].s_to:
+            current_room = room[{current_room}].s_to
+
+        if command == 'e' and room[{current_room}].e_to:
+            current_room = room[{current_room}].e_to
+
+        if command == 'w' and room[{current_room}].w_to:
+            current_room = room[{current_room}].w_to
+
+        else:
             print("There isn\'t a room there.")
 
+    print(f"Current Room: {current_room}\n Description:{current_room}")
+    
+
+status_report(player1, room)

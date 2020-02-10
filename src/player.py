@@ -22,13 +22,13 @@ def drop_item(player_items, item):
 
 
 class Player:
-    def __init__(self, name, room, player_items):
+    def __init__(self, name, current_room, player_items):
         self.name = name
-        self.room = room
+        self.current_room = current_room
         self.player_items = player_items
 
     def __str__(self):
-        return f"{self.name} is in the {self.room}."
+        return f"{self.name} is in the {self.current_room}."
 
 # PART 2:
 # Make rooms able to hold multiple items
