@@ -19,6 +19,13 @@ class Room:
         self.description = description
         self.r_item = r_item
 
+    def __repr__(self):
+        return 'Name:'+self.name+'\n Description:'+self.description+'\n Item:'+self.r_item+''
+
+    def __str__(self):
+        return 'Name:'+self.name+'\n Description:'+self.description+'\n Item:'+self.r_item+''
+        
+
 # PART 2:
 # Make rooms able to hold multiple items
 # Make the player able to carry multiple items

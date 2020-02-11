@@ -37,12 +37,7 @@ room['narrow'].n_to = room['treasure'],
 room['treasure'].s_to = room['narrow']
 
 
-# def find_room(current_room):
-#    for k, v in room:
-#         if k == current_room:
-#             return v
-
-print('PRINT THE DAMN ROOM VALUE:', room['outside'])
+# print('PRINT THE DAMN ROOM VALUE:', room['outside'].name)
 
 
 def status_report(player, room):
@@ -50,7 +45,8 @@ def status_report(player, room):
     quit = False
     
     while not quit: 
-        command = input("(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\nCommand: ")
+        print(f"Current Room Status:", str(current_room))
+        command = input("\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\nCommand: ")
         command = command.lower().strip()
 
         if command == '':
@@ -61,21 +57,22 @@ def status_report(player, room):
 
         if command == 'n':
             current_room = room[current_room].n_to
-            print(f'Current Room Status: {current_room}')
+            print(f'You enter the: {current_room}')
 
         elif command == 's' and room[current_room].s_to:
             current_room = room[current_room].s_to
+            print(f'You enter the: {current_room}')
 
         elif command == 'e' and room[current_room].e_to:
             current_room = room[current_room].e_to
+            print(f'You enter the: {current_room}')
 
         elif command == 'w' and room[current_room].w_to:
             current_room = room[current_room].w_to
+            print(f'You enter the: {current_room}')
 
         else:
             print("There isn\'t a room there.")
-
-    print(f"Current Room: {current_room}\n Description:{current_room}")
     
 player1 = Player('A-aron', 'outside', 'bat')
 status_report(player1, room)
