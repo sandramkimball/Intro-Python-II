@@ -1,33 +1,40 @@
 # Implement a class to hold room info: name, description attributes.
 
-room_items = []
-        
-def get_item(room_items, item):
-    for i in room_items:
-        if not item:
-            room_items = room_items.append(item)
-
-def drop_item(room_items, item):
-    for i in room_items:
-        if i == item:
-            room_items.remove(i)
-
-
 class Room:
-    def __init__(self, name, description, r_item):
+    def __init__(self, name, description, r_item, direction, item):
         self.name = name
         self.description = description
         self.r_item = r_item
 
-    def __repr__(self):
-        return 'Name:'+self.name+'\n Description:'+self.description+'\n Item:'+self.r_item+''
+    r_items=[]
+    item=''
 
     def __str__(self):
-        return 'Name:'+self.name+'\n Description:'+self.description+'\n Item:'+self.r_item+''
-        
+        return f'Room: {+self.name}\n {self.description}\n The room contains a {self.r_item}.'
 
-# PART 2:
+    # set state of direction of room for 'map'
+    def room_link(self, name, command):
+        if command == 'n':
+            name = name.n_to
+        if command == 's':
+            name = name.s_to
+        if command == 'e':
+            name = name.e_to
+        if command == 'w':
+            name = name.w_to
+        else:
+            print('That is not an option.')
+
+    def return_item(self, command, r_items, item):
+        if command=='d':
+           r_items.append(item)
+
+    def remove_item(self, command, r_items, item):
+        if command=='g':
+            for i in r_items:
+                if i == item:
+                    r_items.remove(i)    
+
+# add directional
 # Make rooms able to hold multiple items
 # Make the player able to carry multiple items
-# Add items to the game that the user can carry around
-# Add get [ITEM_NAME] and drop [ITEM_NAME] commands to the parser

@@ -9,9 +9,6 @@ from player import Player
 
 # PART 2:
 # Make rooms able to hold multiple items
-# Make the player able to carry multiple items
-# Add items to the game that the user can carry around
-# Add get [ITEM_NAME] and drop [ITEM_NAME] commands to the parser
 
 
 room = {
@@ -37,7 +34,7 @@ room['narrow'].n_to = room['treasure'],
 room['treasure'].s_to = room['narrow']
 
 
-# print('PRINT THE DAMN ROOM VALUE:', room['outside'].name)
+# print('PRINT THE ROOM VALUE:', room['outside'].name)
 
 
 def status_report(player, room):
@@ -47,6 +44,7 @@ def status_report(player, room):
     while not quit: 
         print(f"Current Room Status:", str(current_room))
         command = input("\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\nCommand: ")
+        command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(G)rab {current_room.r_item}\n(D)rop {current_room.r_item}\n(Q)uit\nCommand: ")
         command = command.lower().strip()
 
         if command == '':
@@ -55,24 +53,29 @@ def status_report(player, room):
         if command == 'q':
             quit = True
 
-        if command == 'n':
+        if command == 'n' and room[current_room].n_to:
             current_room = room[current_room].n_to
             print(f'You enter the: {current_room}')
 
-        elif command == 's' and room[current_room].s_to:
+        if command == 's' and room[current_room].s_to:
             current_room = room[current_room].s_to
             print(f'You enter the: {current_room}')
 
-        elif command == 'e' and room[current_room].e_to:
+        if command == 'e' and room[current_room].e_to:
             current_room = room[current_room].e_to
             print(f'You enter the: {current_room}')
 
-        elif command == 'w' and room[current_room].w_to:
+        if command == 'w' and room[current_room].w_to:
             current_room = room[current_room].w_to
             print(f'You enter the: {current_room}')
 
         else:
             print("There isn\'t a room there.")
     
-player1 = Player('A-aron', 'outside', 'bat')
+player1 = Player('A-aron', room['outside'])
 status_report(player1, room)
+
+# how tf to pass commands to room and items to player.
+# if player picks up item, it's removed from room attributes:
+#  player.p_items.append(item)
+#  current_room.r_items.remove(item)
