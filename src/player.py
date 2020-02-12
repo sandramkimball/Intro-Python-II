@@ -1,21 +1,22 @@
 # Write a class to hold player information, e.g. current room, items
 
-
-
 class Player:
+    # attributes(params):
     def __init__(self, name, current_room, p_items):
         self.name = name
         self.current_room = current_room
         self.p_items = p_items
 
-    p_items = []
-    current_room = {}
+    # p_items = []
+    # current_room = {}
 
     def __str__(self):
         return f"{self.name} is in the {self.current_room}."
 
-    # def current_room():
-    # def room_direction():
+    # actions(functions):
+    def move(self):
+        print('You move ahead.')
+
 
     def get_item(self, p_items, r_item):
         p_items.append(r_item)
@@ -28,8 +29,10 @@ class Player:
                 return f"Item dropped."
 
 
+player2 = Player('Lafonda', room['outside'], 'spatula')
+
 # save direction: current and where moving to:
 # command input sets room_direction? opposite?
-# Add get [ITEM_NAME] and drop [ITEM_NAME] commands to the parser
+# COMPLETE Add get [ITEM_NAME] and drop [ITEM_NAME] commands to the parser
 
 
