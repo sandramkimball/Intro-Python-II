@@ -1,28 +1,31 @@
 # Implement a class to hold room info: name, description attributes.
 
 class Room:
-    def __init__(self, name, description, r_items, direction):
+    def __init__(self, name, description, item, n_to, s_to, e_to, w_to):
         self.name = name
         self.description = description
-        self.r_items = r_items
-        self.direction = direction
-
-
-    # r_items=[]
+        self.item = item
+        self.n_to = n_to
+        self.s_to = s_to
+        self.e_to = e_to
+        self.w_to = w_to
+    
+    def list(self, *argv):
+        return argv
 
     def __str__(self):
         return f'Room: {self.name}\n {self.description}\n You also see a {self.r_items}.'
 
     #actions(functions):
-    def return_item(self, command, r_items, item):
+    def return_item(self, command, items):
         if command=='d':
-           r_items.append(item)
+           list.append(item)
 
-    def remove_item(self, command, r_items, item):
+    def remove_item(self, command, items):
         if command=='g':
-            for i in r_items:
+            for i in list:
                 if i == item:
-                    r_items.remove(i)    
+                    list.remove(i)    
 
 # add directions for linked rooms
 # Make rooms able to hold multiple items

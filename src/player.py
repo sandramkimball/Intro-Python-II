@@ -29,7 +29,7 @@ class Player:
                 return f"Item dropped."
 
 
-player2 = Player('Lafonda', room['outside'], 'spatula')
+
 
 # save direction: current and where moving to:
 # command input sets room_direction? opposite?

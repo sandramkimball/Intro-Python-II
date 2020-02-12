@@ -8,13 +8,13 @@ from player import Player
 # If the user enters "q", quit the game.
 
 room = {
-    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons", "Salami"),
+    'outside': Room("Outside Cave Entrance", "North of you, the cave mount beckons", "Salami"),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""", "Flower Pot"),
+    'foyer': Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""", "Flower Pot"),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", "Rubber Shamshir"),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", "Moose Head"),
+    'narrow': Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", "Moose Head"),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", "Legendary Squeeky Toy"),
 }
@@ -30,30 +30,40 @@ room['narrow'].n_to = room['treasure'],
 room['treasure'].s_to = room['narrow']
 
 class Directions:
-    def __init__(self, n_to, s_to, e_to, w_to):
-        self.n_to = n_to,
-        self.s_to = s_to, 
-        self.e_to = e_to,
-        self.w_to = w_to
-
-class Locations(Directions):
-    def __init__(self, n_to, s_to, e_to, w_to, room):
-        super().__init__(n_to, s_to, e_to, w_to)
+    def __init__(self, room):
         self.room = room
-    def __repr__(self):
-        return f"{self.room}.{self.n_to}"
-    def __str__(self):
-        return f"{self.room}.{self.n_to}"
+
+    def n_to(self, room):
+        return room['room'].n_to
+
+    def s_to(self, room):
+        return room['room'].s_to
+
+    def e_to(self, room):
+        return room['room'].e_to
+
+    def w_to(self, room):
+        return room['room'].w_to
 
 
-def command_parcer(player, room):
+def command_parcer(player, room, ):
     current_room = player.current_room    
     quit = False
+    # def n_to(self, room):
+    #     return room['room'].n_to
+
+    # def s_to(self, room):
+    #     return room['room'].s_to
+
+    # def e_to(self, room):
+    #     return room['room'].e_to
+
+    # def w_to(self, room):
+    #     return room['room'].w_to
     
     while not quit: 
-        print(f"Current Room Status:\n", str(current_room))
-        command = input("\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\nCommand: ")
-        # command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(G)rab {current_room.r_items}\n(D)rop {current_room.r_items}\n(Q)uit\nCommand: ")
+        print(f"Current Room Status:\n", current_room)
+        command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(G)rab Item*\n(D)rop Item*\n(Q)uit\nCommand: ")
         command = command.lower().strip()
 
         if command == '':
@@ -62,9 +72,9 @@ def command_parcer(player, room):
         if command == 'q':
             quit = True
 
-        if command == 'n' and room[current_room].n_to:
-            current_room = room[current_room].n_to
-            print(f'You go North into...\n', current_room.values() )
+        if command == 'n' and current_room.n_to:
+            current_room = current_room.n_to
+            print(f'You go North into...\n', current_room.n_to )
 
         if command == 's' and room[current_room].s_to:
             current_room = room[current_room].s_to
@@ -82,6 +92,7 @@ def command_parcer(player, room):
             print("There isn\'t a room there.")
     
 player1 = Player('A-aron', room['outside'], 'key')
+player2 = Player('Lafonda', room['outside'], 'spatula')
 command_parcer(player1, room)
 
 
