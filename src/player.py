@@ -18,13 +18,13 @@ class Player:
 
     def get_item(self, p_items, r_item):
         p_items.append(r_item)
-        return f"You picked up a {r_item}."
+        print(f"You picked up a {r_item}.")
 
     def drop_item(self, p_items, item):
         for i in p_items:
             if i == item:
                 p_items.remove(i)
-                print(Item dropped.)
+                print('Item dropped.')
 
 
 
