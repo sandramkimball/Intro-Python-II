@@ -1,34 +1,23 @@
 # Implement a class to hold room info: name, description attributes.
-from item import  Item
-
-# class item_list:
-#     def __init__(self, *argv):
-#         self.argv = argv
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, r_items=[]):
         self.name = name
         self.description = description
+        self.r_items = r_items
         self.n_to = None
         self.s_to = None
         self.e_to = None
         self.w_to = None
 
+    def __repr__(self):
+        return f"{self.name}\n {self.description}\n There is a {self.r_items}"
+
     def __str__(self):
-        return f'{self.name}\n {self.description}'
+        return f"{self.name}\n {self.description}\n There is a {self.r_items}"
 
-    
-    #actions(functions):
-    # def return_item(self, command, item):
-    #     if command=='d':
-    #        item_list.append(item)
+    def return_item(self, item):
+        self.r_items.append(item)
 
-    # def remove_item(self, command, item):
-    #     if command=='g':
-    #         for i in item_list:
-    #             if i == item:
-    #                 item_list.remove(i)    
-
-    
-# Item('Cat', 'Looks mean')
-# Item('Katana', 'It\'s super sharp.')
+    def remove_item(self, item):
+        self.r_items.remove(item)
