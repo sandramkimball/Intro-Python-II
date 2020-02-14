@@ -7,13 +7,18 @@ room = {
 
     'foyer': Room("Foyer", """Dim light filters in from the south. Dusty passages run north and east.""",r_items=[Item('Moose Head', 'It stares into your soul')]),
 
-
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm.""", r_items=[Item('Katana', 'Bruh, it\'s super sharp.')]),
 
     'narrow': Room("Narrow Passage", """The narrow passage bends here from west to north. The smell of gold permeates the air.""", r_items=[Item('Legendary Squeeky Toy', 'Squeek squeeky squeek')]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.""", r_items=[Item('Cat', 'Looks mean')]),
 }
+
+# Items?
+Item('Salami','Dry and Spicy')
+Item('Bread', 'Pumpernickel')
+Item('Mustard', 'Djon')
+Item('Cheese', 'Holy Swiss!')
 
 # Link rooms together
 room['outside'].n_to = room['foyer'],
@@ -26,29 +31,26 @@ room['narrow'].n_to = room['treasure'],
 room['treasure'].s_to = room['narrow']
 
 
-player = Player(input('What is thoust name? '), room['outside'], p_items=['Key'])
+player = Player(input('\n Who are you? '), room['outside'], p_items=['Key'])
 
-print(f"Current Room Status:\n", player.current_room)
+print('\n', player.current_room)
 
 while True:
-    command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(G)rab Item*\n(D)rop Item*\n(Q)uit\nCommand: ")
+    command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(G)rab Item\n(D)rop {player.p_items}\n(Q)uit\nCommand: ")
     command = command.lower().strip()
 
     if command == 'q':
         exit()
-    if command == '':
-        continue
     if command in ['n', 's', 'e', 'w']:
         player.move(command)
         
     if command == 'g':
         player.get_item(player.current_room.r_items)
-        # room[current_room].remove_item(player.current_room.r_items)
+        player.current_room.remove_item(player.current_room.r_items)
 
     if command == 'd':
-        player.drop_item(player.current_room.r_items)
-        # room[current_room].return_item(player.current_room.r_items)
+        player.drop_item(player.p_items)
+        player.current_room.return_item(player.p_items)
 
-
-    else:
-        print('There isn\'t a room there.')
+    if command == '':
+        continue

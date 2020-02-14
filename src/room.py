@@ -10,11 +10,11 @@ class Room:
         self.e_to = None
         self.w_to = None
 
-    def __repr__(self):
-        return f"{self.name}\n {self.description}\n There is a {self.r_items}"
 
     def __str__(self):
-        return f"{self.name}\n {self.description}\n There is a {self.r_items}"
+        return f"STR: {self.name}\n {self.description}\n There is a {self.r_items}/n"
+    def __repr__(self):
+        return f"REPR: {self.name}\n {self.description}\n There is a {self.r_items}\n"
 
     def return_item(self, item):
         self.r_items.append(item)

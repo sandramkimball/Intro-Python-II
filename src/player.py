@@ -13,17 +13,17 @@ class Player:
         next_room = getattr(self.current_room, f"{command}_to")
         if next_room is not None:
             self.current_room = next_room
-            print(f'You enter the {self.current_room}')
+            print('You enter the', self.current_room)
         else:
             print('There\'s a wall there.')
 
     def get_item(self, item):
         self.p_items.append(item)
-        print(f"You picked up a {item}.")
+        print(f"You picked up a {item}.\n Inventory: \n {self.p_items}")
 
     def drop_item(self, item):
         self.p_items.remove(item)
-        print(f'Item dropped the {item}.')
+        print(f'You dropped the {item}. \n Inventory: \n {self.p_items}')
 
 
 
